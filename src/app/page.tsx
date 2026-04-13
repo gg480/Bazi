@@ -75,11 +75,11 @@ export default function Home() {
                     <div className="text-3xl">☰</div>
                     <div>
                       <h3 className="text-lg font-bold text-red-900 dark:text-red-100">六十四命格</h3>
-                      <p className="text-xs text-gray-500">东方性格测试 · 六爻测定</p>
+                      <p className="text-xs text-gray-500">八字天命 + 十六天问 · 东方性格测试</p>
                     </div>
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    六道天问，阴阳二选，六爻成卦，测出你的专属命格
+                    输入生辰八字，十六道天问推演专属命格
                   </p>
                 </CardContent>
               </Card>
