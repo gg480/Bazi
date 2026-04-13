@@ -1,0 +1,421 @@
+
+<style>
+:root { --tab-active-bg: var(--color-background-primary); }
+.role-tabs { display:flex; gap:0; border-bottom:0.5px solid var(--color-border-secondary); margin-bottom:1.5rem; }
+.role-tab { padding:10px 20px; font-size:14px; cursor:pointer; border:none; background:transparent; color:var(--color-text-secondary); border-bottom:2px solid transparent; margin-bottom:-1px; transition:all .15s; font-weight:400; }
+.role-tab.active { color:var(--color-text-primary); border-bottom:2px solid var(--color-text-primary); font-weight:500; }
+.role-tab:hover:not(.active) { color:var(--color-text-primary); background:var(--color-background-secondary); }
+.tab-panel { display:none; } .tab-panel.active { display:block; }
+.section-title { font-size:13px; font-weight:500; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:.06em; margin:0 0 10px; }
+.card { background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-lg); padding:1rem 1.25rem; margin-bottom:12px; }
+.feature-row { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:0.5px solid var(--color-border-tertiary); }
+.feature-row:last-child { border-bottom:none; padding-bottom:0; }
+.badge { display:inline-block; font-size:11px; padding:2px 8px; border-radius:20px; font-weight:500; white-space:nowrap; }
+.badge-must { background:var(--color-background-danger); color:var(--color-text-danger); }
+.badge-should { background:var(--color-background-warning); color:var(--color-text-warning); }
+.badge-could { background:var(--color-background-info); color:var(--color-text-info); }
+.badge-gold { background:#FAEEDA; color:#854F0B; }
+.badge-gray { background:var(--color-background-secondary); color:var(--color-text-secondary); }
+.phase-bar { height:8px; border-radius:4px; margin-top:6px; }
+.risk-tag { display:inline-block; font-size:11px; padding:2px 7px; border-radius:4px; font-weight:500; }
+.risk-h { background:#FCEBEB; color:#A32D2D; }
+.risk-m { background:#FAEEDA; color:#854F0B; }
+.risk-l { background:#EAF3DE; color:#3B6D11; }
+.mono { font-family:var(--font-mono); font-size:12px; background:var(--color-background-secondary); border:0.5px solid var(--color-border-tertiary); border-radius:6px; padding:12px 14px; line-height:1.7; color:var(--color-text-primary); white-space:pre-wrap; word-break:break-word; margin-bottom:10px; }
+.prompt-section { margin-bottom:1.5rem; }
+.copy-btn { font-size:11px; padding:3px 10px; border-radius:4px; cursor:pointer; border:0.5px solid var(--color-border-secondary); background:transparent; color:var(--color-text-secondary); float:right; margin-bottom:4px; }
+.copy-btn:hover { background:var(--color-background-secondary); }
+.stack-pill { display:inline-block; font-size:12px; padding:3px 10px; border-radius:20px; background:var(--color-background-secondary); border:0.5px solid var(--color-border-tertiary); color:var(--color-text-primary); margin:3px 3px 3px 0; }
+.metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:12px; }
+.metric-card { background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:12px; text-align:center; }
+.metric-num { font-size:22px; font-weight:500; color:var(--color-text-primary); }
+.metric-lbl { font-size:12px; color:var(--color-text-secondary); margin-top:3px; }
+.timeline-row { display:flex; gap:0; margin-bottom:16px; }
+.tl-phase { flex:1; position:relative; }
+.tl-bar { height:10px; margin-bottom:6px; }
+.tl-label { font-size:12px; font-weight:500; color:var(--color-text-primary); }
+.tl-sub { font-size:11px; color:var(--color-text-secondary); }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:520px) { .two-col { grid-template-columns:1fr; } .metric-grid { grid-template-columns:1fr 1fr; } }
+</style>
+
+<div style="padding:1.5rem 0 0;">
+  <div style="margin-bottom:1.5rem;">
+    <div style="font-size:18px; font-weight:500; color:var(--color-text-primary); margin-bottom:4px;">八字命理分析平台</div>
+    <div style="font-size:13px; color:var(--color-text-secondary);">产品需求 · 项目计划 · 技术方案 · AI 提示词</div>
+  </div>
+
+  <div class="role-tabs">
+    <button class="role-tab active" onclick="switchTab('pm')">🎯 产品经理</button>
+    <button class="role-tab" onclick="switchTab('pjm')">📋 项目经理</button>
+    <button class="role-tab" onclick="switchTab('dev')">🛠 开发 Leader</button>
+  </div>
+
+  <!-- PM TAB -->
+  <div id="tab-pm" class="tab-panel active">
+    <div class="metric-grid">
+      <div class="metric-card"><div class="metric-num" style="color:#185FA5">¥180</div><div class="metric-lbl">单用户年均LTV</div></div>
+      <div class="metric-card"><div class="metric-num" style="color:#0F6E56">8%</div><div class="metric-lbl">免费→付费转化</div></div>
+      <div class="metric-card"><div class="metric-num" style="color:#854F0B">3x</div><div class="metric-lbl">命理类目增速</div></div>
+    </div>
+
+    <p class="section-title">商业价值定位</p>
+    <div class="card" style="margin-bottom:16px;">
+      <div style="font-size:13px; color:var(--color-text-secondary); line-height:1.8;">
+        命理 SaaS 的核心商业模式是<strong style="color:var(--color-text-primary); font-weight:500;">数据资产 + 专家撮合 + AI 增值</strong>三层叠加。用户一旦输入八字，形成强绑定 —— 每次流年更新、大运切换都是天然复购节点。结合珠宝玉器的选品场景，可延伸出<strong style="color:var(--color-text-primary); font-weight:500;">命理选品推荐</strong>的独特差异化功能，这是竞品几乎无法复制的私域护城河。
+      </div>
+    </div>
+
+    <p class="section-title">核心功能规划（MoSCoW）</p>
+    <div class="card">
+      <div class="feature-row">
+        <div style="min-width:60px"><span class="badge badge-must">Must</span></div>
+        <div>
+          <div style="font-size:14px; font-weight:500; color:var(--color-text-primary);">精准排盘引擎</div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">四柱干支、五行分布、十神格局、日主强弱、纳音五行；支持公历/农历互转，含节气校正</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div style="min-width:60px"><span class="badge badge-must">Must</span></div>
+        <div>
+          <div style="font-size:14px; font-weight:500; color:var(--color-text-primary);">AI 深度解读报告</div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">基于命盘数据调用 Claude API 生成个性化白话解读；涵盖性格、事业、财运、感情四大模块</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div style="min-width:60px"><span class="badge badge-should">Should</span></div>
+        <div>
+          <div style="font-size:14px; font-weight:500; color:var(--color-text-primary);">大运 · 流年走势图</div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">可视化呈现每步大运（10年周期）+ 当年流年的吉凶走势；时间轴滚动交互</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div style="min-width:60px"><span class="badge badge-should">Should</span></div>
+        <div>
+          <div style="font-size:14px; font-weight:500; color:var(--color-text-primary);">合婚配对分析</div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">双人八字用神互补度、六冲六合判断、婚姻宫位分析；付费解锁完整报告（高转化场景）</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div style="min-width:60px"><span class="badge badge-could">Could</span></div>
+        <div>
+          <div style="font-size:14px; font-weight:500; color:var(--color-text-primary);">命理选品推荐 ⭐</div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">根据用神五行推荐对应玉石（如土命推荐黄玉、田黄；水命推荐青金石、墨翠）；可直接接入自家商品库</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div style="min-width:60px"><span class="badge badge-could">Could</span></div>
+        <div>
+          <div style="font-size:14px; font-weight:500; color:var(--color-text-primary);">择日万年历</div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">个人命理 + 黄历双维度择吉；适用婚嫁、开业、动土；付费订阅场景</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-title" style="margin-top:1.25rem;">变现路径设计</p>
+    <div class="two-col">
+      <div class="card">
+        <div style="font-size:13px; font-weight:500; margin-bottom:8px;">C 端分级</div>
+        <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.9;">
+          <div>🆓 免费 — 基础排盘 + 五行比例</div>
+          <div>💰 单次 ¥9.9 — 完整 AI 报告</div>
+          <div>📅 订阅 ¥68/年 — 流年 + 合婚 + 择日</div>
+          <div>👑 尊享 ¥298/年 — 含真人顾问1对1</div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px; font-weight:500; margin-bottom:8px;">B 端 / 私域</div>
+        <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.9;">
+          <div>🔌 API 授权给命理师工具</div>
+          <div>🛍 自家珠宝店嵌入选品模块</div>
+          <div>📱 微信小程序裂变拉新</div>
+          <div>🎁 礼品卡（送人命理报告）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PJM TAB -->
+  <div id="tab-pjm" class="tab-panel">
+    <p class="section-title">里程碑计划（10 周 MVP → 正式上线）</p>
+    <div class="card">
+      <div class="timeline-row">
+        <div class="tl-phase" style="flex:2">
+          <div class="tl-bar" style="background:#B5D4F4; border-radius:4px 0 0 4px;"></div>
+          <div class="tl-label">Phase 1 · MVP</div>
+          <div class="tl-sub">第 1–4 周</div>
+        </div>
+        <div class="tl-phase" style="flex:3">
+          <div class="tl-bar" style="background:#9FE1CB; border-radius:0;"></div>
+          <div class="tl-label">Phase 2 · Beta</div>
+          <div class="tl-sub">第 5–8 周</div>
+        </div>
+        <div class="tl-phase" style="flex:2">
+          <div class="tl-bar" style="background:#FAC775; border-radius:0 4px 4px 0;"></div>
+          <div class="tl-label">Phase 3 · Launch</div>
+          <div class="tl-sub">第 9–10 周</div>
+        </div>
+      </div>
+      <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.9; border-top:0.5px solid var(--color-border-tertiary); padding-top:10px;">
+        <div><span style="color:#185FA5; font-weight:500;">P1：</span>排盘算法完成 · 基础 UI · AI 报告接口 · 用户注册/登录</div>
+        <div><span style="color:#0F6E56; font-weight:500;">P2：</span>大运流年可视化 · 合婚模块 · 支付接入 · 内测种子用户50人</div>
+        <div><span style="color:#854F0B; font-weight:500;">P3：</span>性能调优 · SEO/小程序分发 · 数据埋点 · 正式上线</div>
+      </div>
+    </div>
+
+    <p class="section-title" style="margin-top:1.25rem;">最小团队配置（AI 辅助开发模式）</p>
+    <div class="card">
+      <div class="feature-row" style="padding:8px 0;">
+        <div style="min-width:110px; font-size:13px; font-weight:500; color:var(--color-text-primary);">全栈开发 × 1</div>
+        <div style="font-size:12px; color:var(--color-text-secondary);">主导前后端实现；重度使用 Cursor / Claude Code；约 40h/周</div>
+      </div>
+      <div class="feature-row" style="padding:8px 0;">
+        <div style="min-width:110px; font-size:13px; font-weight:500; color:var(--color-text-primary);">命理顾问 × 1</div>
+        <div style="font-size:12px; color:var(--color-text-secondary);">验证算法逻辑与解读文案；兼职即可；约 5h/周</div>
+      </div>
+      <div class="feature-row" style="padding:8px 0;">
+        <div style="min-width:110px; font-size:13px; font-weight:500; color:var(--color-text-primary);">UI/产品 × 1</div>
+        <div style="font-size:12px; color:var(--color-text-secondary);">原型设计 + 用户测试；可由你（熟悉业务）兼任产品角色</div>
+      </div>
+    </div>
+
+    <p class="section-title" style="margin-top:1.25rem;">风险矩阵</p>
+    <div class="card">
+      <div class="feature-row">
+        <span class="risk-tag risk-h" style="min-width:30px">高</span>
+        <div style="margin-left:8px">
+          <div style="font-size:13px; font-weight:500; color:var(--color-text-primary);">算法精度争议</div>
+          <div style="font-size:12px; color:var(--color-text-secondary);">节气换月点、子时跨日、出生地经纬度等边界条件极易出错，影响用户信任</div>
+          <div style="font-size:12px; color:#0F6E56; margin-top:3px;">↳ 预控：引入已有开源算法库（lunar-javascript）并由专业命理师逐条验收</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <span class="risk-tag risk-h" style="min-width:30px">高</span>
+        <div style="margin-left:8px">
+          <div style="font-size:13px; font-weight:500; color:var(--color-text-primary);">AI 解读幻觉 / 负面内容</div>
+          <div style="font-size:12px; color:var(--color-text-secondary);">LLM 对"命不好"等内容处理不当，可能引发用户焦虑或投诉</div>
+          <div style="font-size:12px; color:#0F6E56; margin-top:3px;">↳ 预控：Prompt 内置正向引导框架；输出过滤层；用户反馈机制</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <span class="risk-tag risk-m" style="min-width:30px">中</span>
+        <div style="margin-left:8px">
+          <div style="font-size:13px; font-weight:500; color:var(--color-text-primary);">AI API 成本超支</div>
+          <div style="font-size:12px; color:var(--color-text-secondary);">用户量增长后报告生成成本快速拉升</div>
+          <div style="font-size:12px; color:#0F6E56; margin-top:3px;">↳ 预控：缓存相同八字的报告；免费版使用 Haiku，付费版使用 Sonnet</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <span class="risk-tag risk-m" style="min-width:30px">中</span>
+        <div style="margin-left:8px">
+          <div style="font-size:13px; font-weight:500; color:var(--color-text-primary);">合规 / 封建迷信政策</div>
+          <div style="font-size:12px; color:var(--color-text-secondary);">国内平台对命理类内容审核严格，小程序可能被下架</div>
+          <div style="font-size:12px; color:#0F6E56; margin-top:3px;">↳ 预控：定位为"东方文化 · 人格分析"，避免"预测吉凶"等强迷信表述</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <span class="risk-tag risk-l" style="min-width:30px">低</span>
+        <div style="margin-left:8px">
+          <div style="font-size:13px; font-weight:500; color:var(--color-text-primary);">竞品同质化</div>
+          <div style="font-size:12px; color:var(--color-text-secondary);">八字类工具市场已较饱和</div>
+          <div style="font-size:12px; color:#0F6E56; margin-top:3px;">↳ 预控：命理选品推荐 + 珠宝私域是差异化护城河，竞品难复制</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-title" style="margin-top:1.25rem;">成本估算（10 周）</p>
+    <div class="two-col">
+      <div class="card">
+        <div style="font-size:13px; font-weight:500; margin-bottom:8px;">研发成本</div>
+        <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.9;">
+          <div>开发人力（自研）：主要时间成本</div>
+          <div>域名 + 服务器：¥200–500/月</div>
+          <div>Claude API 内测阶段：~¥300–800</div>
+          <div>UI 工具（Figma 等）：免费/低成本</div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px; font-weight:500; margin-bottom:8px;">上线后月成本</div>
+        <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.9;">
+          <div>服务器：¥300–600/月</div>
+          <div>AI API（1000 付费用户）：~¥800/月</div>
+          <div>短信 / 支付通道：¥100–200/月</div>
+          <div>盈亏平衡点：约 25 付费用户/月</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEV TAB -->
+  <div id="tab-dev" class="tab-panel">
+    <p class="section-title">技术栈选型</p>
+    <div class="card" style="margin-bottom:16px;">
+      <div style="margin-bottom:10px;">
+        <span style="font-size:12px; font-weight:500; color:var(--color-text-secondary); display:block; margin-bottom:6px;">前端</span>
+        <span class="stack-pill">Next.js 14 (App Router)</span>
+        <span class="stack-pill">TypeScript</span>
+        <span class="stack-pill">Tailwind CSS</span>
+        <span class="stack-pill">Recharts</span>
+        <span class="stack-pill">lunar-javascript</span>
+      </div>
+      <div style="margin-bottom:10px;">
+        <span style="font-size:12px; font-weight:500; color:var(--color-text-secondary); display:block; margin-bottom:6px;">后端 / AI</span>
+        <span class="stack-pill">Next.js API Routes</span>
+        <span class="stack-pill">Anthropic SDK</span>
+        <span class="stack-pill">Prisma + PostgreSQL</span>
+        <span class="stack-pill">Redis (缓存)</span>
+      </div>
+      <div>
+        <span style="font-size:12px; font-weight:500; color:var(--color-text-secondary); display:block; margin-bottom:6px;">部署</span>
+        <span class="stack-pill">Vercel</span>
+        <span class="stack-pill">Supabase</span>
+        <span class="stack-pill">Upstash Redis</span>
+      </div>
+    </div>
+
+    <p class="section-title">核心模块开发路径</p>
+    <div class="card" style="margin-bottom:16px;">
+      <div style="font-size:12px; color:var(--color-text-secondary); line-height:2; font-family:var(--font-mono);">
+        <div><span style="color:#185FA5">Step 1</span> 日期转换层 → 公历转农历/干支，含节气精确到分钟</div>
+        <div><span style="color:#185FA5">Step 2</span> 四柱计算引擎 → 年柱/月柱/日柱/时柱干支推算</div>
+        <div><span style="color:#185FA5">Step 3</span> 五行/十神映射层 → 以日干为基准映射十神关系表</div>
+        <div><span style="color:#185FA5">Step 4</span> 格局强弱分析 → 月令旺衰 + 地支藏干得分算法</div>
+        <div><span style="color:#185FA5">Step 5</span> 大运推算 → 阳男阴女/阴男阳女顺逆起运规则</div>
+        <div><span style="color:#185FA5">Step 6</span> AI 报告生成 → 将结构化命盘数据注入 Prompt</div>
+        <div><span style="color:#185FA5">Step 7</span> 前端可视化 → 五行雷达图 + 大运时间轴组件</div>
+      </div>
+    </div>
+
+    <p class="section-title">AI 编程提示词 · 模块一：排盘核心算法</p>
+    <div class="prompt-section">
+      <button class="copy-btn" onclick="copyPrompt('p1')">复制</button>
+      <div class="mono" id="p1">你是一位精通中国传统命理学的全栈工程师。请用 TypeScript 实现一个完整的八字排盘核心算法库，要求：
+
+【数据结构】
+- 定义 BaziChart 接口，包含：pillars（四柱干支）、wuxing（五行计数）、shishen（十神分析）、riZhuStrength（日主强弱评分0-100）
+- 定义 DaYun 接口，包含每步大运的干支、起止年龄、流年数组
+
+【算法要求】
+1. 公历转农历：使用 lunar-javascript 库，节气换月以精确到分钟的节气时刻为准
+2. 四柱推算：
+   - 年柱：以立春为界（非正月初一）
+   - 月柱：以12节气为界，提供节气精确时刻对照表
+   - 日柱：使用干支纪日算法（甲子日为基准日）
+   - 时柱：23:00-01:00 为子时，含跨日判断
+3. 十神推算：以日干为我，实现完整的生克制化十神映射表（正官、七杀、正印、偏印、比肩、劫财、食神、伤官、正财、偏财）
+4. 日主强弱：实现月令得分（旺相休囚死）+ 地支藏干透出得分算法，输出强/中/弱三级判断
+5. 大运推算：实现阳男阴女顺排、阴男阳女逆排规则；起运岁数 = 出生到最近节气天数 / 3
+
+【输出】
+- 导出 calculateBazi(birthDate: Date, birthHour: number, gender: 'male'|'female', birthplace?: {lat:number,lng:number}) 函数
+- 包含完整 JSDoc 注释和边界情况处理（如子时跨日、节气当天出生等）
+- 附带单元测试用例：使用3个真实历史名人八字验证准确性</div>
+    </div>
+
+    <p class="section-title">AI 编程提示词 · 模块二：AI 解读报告生成</p>
+    <div class="prompt-section">
+      <button class="copy-btn" onclick="copyPrompt('p2')">复制</button>
+      <div class="mono" id="p2">请实现一个 Next.js API Route：/api/report/generate，功能是将排盘结果转化为 AI 八字解读报告。
+
+【输入接口】
+接收 POST 请求，body 为序列化后的 BaziChart 对象（含四柱、五行、十神、大运信息）
+
+【Prompt 工程要求】
+System Prompt 需包含：
+1. 角色设定：你是一位通晓子平真诠、滴天髓、穷通宝鉴的资深命理师，语言通俗易懂，不用晦涩术语
+2. 输出框架（严格 JSON 结构）：
+   {
+     "personality": "性格特质（200字）",
+     "career": "事业财运分析（200字）",  
+     "relationship": "感情婚姻分析（200字）",
+     "health": "健康提示（150字）",
+     "wuxing_advice": "五行调候建议（含颜色/方位/玉石推荐）（150字）",
+     "dayun_summary": "当前大运解读（150字）",
+     "overall_score": 1-100的综合运势评分
+   }
+3. 安全引导：所有解读以积极引导为主，规避"此命克夫/克妻/短命"等负面绝对化表述，改用"需注意XX方面的压力"替代
+4. 数据注入模板：将 BaziChart 数据格式化为自然语言描述注入 User Message
+
+【工程实现】
+- 使用 Anthropic SDK + streaming 响应（Server-Sent Events）
+- 免费用户：claude-haiku-4-5 + max_tokens:800
+- 付费用户：claude-sonnet-4-6 + max_tokens:2000
+- 相同八字+大运的报告缓存到 Redis，TTL 30天
+- 实现请求限流：免费用户每日最多3次生成</div>
+    </div>
+
+    <p class="section-title">AI 编程提示词 · 模块三：命理选品推荐（差异化功能）</p>
+    <div class="prompt-section">
+      <button class="copy-btn" onclick="copyPrompt('p3')">复制</button>
+      <div class="mono" id="p3">请实现"命理选品推荐"功能，将八字用神五行与珠宝玉器品类映射。
+
+【五行对应玉石知识库（硬编码）】
+木：绿色系 → 翡翠（阳绿、黄阳绿）、碧玉、绿玛瑙、绿发晶
+火：红色/紫色系 → 南红玛瑙、红宝石、紫牙乌（石榴石）、红珊瑚
+土：黄色/棕色系 → 田黄、黄玉、虎眼石、蜜蜡、木化石
+金：白色/金色系 → 和田白玉、羊脂玉、钻石、白水晶、黄金
+水：黑色/蓝色系 → 墨翠、青金石、蓝宝石、黑玛瑙、海蓝宝
+
+【接口设计】
+输入：{ yongShen: WuxingElement[], xiShen: WuxingElement[], jiShen: WuxingElement[] }（用神/喜神/忌神）
+输出：
+{
+  recommended: [ { category: "翡翠", reason: "日主缺木，翡翠属木，可补木气助运", priority: "first" } ],
+  avoid: [ { category: "墨玉", reason: "日主忌水，深色水系玉石不宜佩戴" } ],
+  styling_tip: "建议佩戴于左手腕，配合木质手串效果更佳"
+}
+
+【扩展】
+- 预留商品 SKU 关联接口：recommendedItems 中可附带 productId 字段，对接自家珠宝库存系统
+- 实现 /api/products/match 端点，接受用神五行返回匹配的在售商品列表（按价格/材质过滤）
+- 在报告页底部展示"为您推荐"模块，嵌入商品卡片组件</div>
+    </div>
+
+    <p class="section-title">AI 编程提示词 · 模块四：前端可视化组件</p>
+    <div class="prompt-section">
+      <button class="copy-btn" onclick="copyPrompt('p4')">复制</button>
+      <div class="mono" id="p4">请用 React + TypeScript + Tailwind CSS 实现以下两个核心可视化组件：
+
+【组件一：五行雷达图 WuxingRadar】
+使用 Recharts RadarChart，5个维度（金木水火土），展示：
+- 命局原局五行分值（蓝色实线）
+- 大运+流年调整后五行（橙色虚线）
+- 中心显示日主五行元素图标
+- 支持 hover tooltip 显示具体分值和十神组成
+Props: { original: WuxingScore, adjusted: WuxingScore, yongShen: string[] }
+
+【组件二：大运时间轴 DaYunTimeline】
+横向滚动时间轴，每个大运块包含：
+- 干支名称（大字）+ 对应五行颜色主题
+- 起止年龄标注
+- 该步大运吉凶评分（1-5星）
+- 点击展开：显示该步大运10个流年的小格（带颜色深浅表示旺衰）
+- 当前所在大运块高亮（带"现在"标签）
+- 响应式：移动端可左右滑动
+Props: { daYunList: DaYun[], currentAge: number, birthYear: number }
+
+【设计规范】
+- 五行颜色：金#D4A017 木#2E8B57 水#1E90FF 火#DC143C 土#A0522D
+- 吉运用暖色渐变，凶运用冷灰色
+- 所有动画使用 framer-motion，时长 300ms
+- 完整 TypeScript 类型定义，无 any</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+function copyPrompt(id) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = '已复制 ✓';
+    setTimeout(() => btn.textContent = '复制', 2000);
+  });
+}
+</script>
